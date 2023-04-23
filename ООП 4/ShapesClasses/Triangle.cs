@@ -12,11 +12,12 @@ namespace ООП_4.ShapesClasses
     public class Triangle : Shape
     {
 
-        public Triangle(Point click, Graphics graphics, char Colored)
+        public Triangle(Point click, Graphics graphics, char Colored, string Name)
         {
             p = click;
             g = graphics;
             this.Colored = Colored;
+            this.Name = Name;
         }
         public override void Save(StreamWriter stream)
         {

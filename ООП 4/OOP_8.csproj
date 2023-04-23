@@ -49,8 +49,10 @@
     <Compile Include="CGroup.cs" />
     <Compile Include="Factory\CShapeArray.cs" />
     <Compile Include="Factory\Factory.cs" />
+    <Compile Include="Observer\CObject.cs" />
+    <Compile Include="Observer\CObserver.cs" />
     <Compile Include="ShapesClasses\CCircle.cs" />
-    <Compile Include="ShapeCreation.cs" />
+    <Compile Include="Factory\ShapeCreation.cs" />
     <Compile Include="ShapesClasses\Decorator.cs" />
     <Compile Include="ShapesClasses\Shape.cs" />
     <Compile Include="Container.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShapesClasses\Square.cs" />
     <Compile Include="ShapesClasses\Triangle.cs" />
+    <Compile Include="TreeViewObserver.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

@@ -21,11 +21,31 @@ namespace ООП_4
         public bool ctrlPressed = false;
         public bool selectMany = false;
         public Decorator decorator;
-        public Container()
+        private TreeViewObserver treeViewObserver;
+        public Container(TreeViewObserver treeViewObserver)
         {
             shapes = new List<Shape>();
+            this.treeViewObserver = treeViewObserver;
+            this.AddObserver(treeViewObserver);
         }
 
+        virtual public void AddOrSelectShape(Shape shape)
+        {
+            if (ctrlPressed == false)
+                unSelectAll();
+            if (isSelect(shape.getPosition())) { return; }
+
+            if (ctrlPressed == false)
+            {
+                shape.AddObserver(treeViewObserver);
+                decorator = new Decorator(shape);
+                shapes.Add(decorator);
+                shape.NotifyEveryoneSelect();
+                shapes.Remove(shape);
+                this.NotifyEveryone();
+                
+            }
+        }
         override public void Draw()
         {
             foreach (Shape shape in shapes)
@@ -78,6 +98,7 @@ namespace ООП_4
             }
             decorator = new Decorator(group);
             shapes.Add(decorator);
+            this.NotifyEveryone();
         }
 
         public void unCompose()
@@ -102,6 +123,7 @@ namespace ООП_4
                 }
                 i++;
             }
+            this.NotifyEveryone();
         }
 
         public void unSelectAll()
@@ -151,6 +173,7 @@ namespace ООП_4
                 }
                 i++;
             }
+            
         }
         public void delshapes()
         {
@@ -159,23 +182,11 @@ namespace ООП_4
                     shapes.RemoveAt(i);
             }
         }
-        virtual public void AddOrSelectShape(Shape shape)
-        {
-            if (ctrlPressed == false)
-                unSelectAll();
-            if (isSelect(shape.getPosition())) { return; }
-            if (ctrlPressed == false)
-            {
-                decorator = new Decorator(shape);
-                shapes.Add(decorator);
-                shapes.Remove(shape);
-            }
-        }
+        
 
         public void Add(Shape shape)
         {
                 shapes.Add(shape);
-            
         }
 
         public void Move(int x, int y, int width, int height)
@@ -231,5 +242,7 @@ namespace ООП_4
                 }
             }
         }
+
+        public List<Shape> GetShapes() { return shapes; }   
     }
 }

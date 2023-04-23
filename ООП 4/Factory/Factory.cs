@@ -29,16 +29,16 @@ namespace ООП_4
             switch (code)
             {
                 case 'S':
-                    shape = new Square(new Point(0, 0), g, 'B');
+                    shape = new Square(new Point(0, 0), g, 'B', "Квадрат");
                     break;
                 case 'C':
-                    shape = new CCIrcle(new Point(0,0), g, 'B');
+                    shape = new CCIrcle(new Point(0,0), g, 'B', "Круг");
                     break;
                 case 'T':
-                    shape = new Triangle(new Point(0, 0), g, 'B');
+                    shape = new Triangle(new Point(0, 0), g, 'B', "Треугольник");
                     break;
                 case 'G':
-                    shape = new CGroup(g);
+                    shape = new CGroup(g, "Группа");
                     break;
                 default:
                     break;

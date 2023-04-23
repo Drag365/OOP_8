@@ -12,11 +12,12 @@ namespace ООП_4
 {
     public class CCIrcle : Shape
     {
-        public CCIrcle(Point click, Graphics graphics, char Colored)
+        public CCIrcle(Point click, Graphics graphics, char Colored, string Name)
         {
             p = click;
             g = graphics;
             this.Colored = Colored;
+            this.Name = Name;
         }
 
         public override void Save(StreamWriter stream)

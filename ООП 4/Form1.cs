@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ООП_4.Factory;
+using ООП_4.Observer;
 using ООП_4.ShapesClasses;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -17,7 +18,7 @@ namespace ООП_4
   
     public partial class Form1 : Form
     {
-        Container container = new Container();// создаем контейнер хранящий круги
+        // создаем контейнер хранящий круги
         public Graphics g;// создаем объект графики
         ShapeCreation Creation;// создаем объект-конвеер кругов
         Bitmap map;// создаем битмап "мап"
@@ -25,12 +26,16 @@ namespace ООП_4
         int typeOfShape = 0;
         char Colored = 'B';
         const string filename = "D:/data.txt";
+        Container container;
+
 
         public Form1()
         {
             InitializeComponent();
             map = new Bitmap(paintField.Width, paintField.Height);// определяем битмап
             Creation = new ShapeCreation(Graphics.FromImage(map));// определяем конвеер кругов
+            TreeViewObserver observer = new TreeViewObserver(shapeTree);
+            container = new Container(observer);
             
         }
 
@@ -40,16 +45,23 @@ namespace ООП_4
             container.Draw();
             paintField.Image = map;
             toolStrip1.Refresh();
+            this.shapeTree.ExpandAll();
         }
 
         private void paintField_MouseClick(object sender, MouseEventArgs e)//функция нажатия мышкой для добавления на поле круга или его выделения
         {
-            if (typeOfShape == 0) 
+            if (typeOfShape == 0)
+            {
                 container.AddOrSelectShape(Creation.createCCircle(e.Location, Colored));
+            }
             else if (typeOfShape == 1)
-                    container.AddOrSelectShape(Creation.createSquare(e.Location, Colored));
+            {
+                container.AddOrSelectShape(Creation.createSquare(e.Location, Colored));
+            }
             else if (typeOfShape == 2)
+            {
                 container.AddOrSelectShape(Creation.createTriangle(e.Location, Colored));
+            }
             paintField.Invalidate();
         }
 
@@ -199,6 +211,11 @@ namespace ООП_4
         private void unGroupButton_Click(object sender, EventArgs e)
         {
             container.unCompose();
+        }
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            
         }
     }
     

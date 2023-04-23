@@ -15,10 +15,16 @@ namespace ООП_4
     {
         private List<Shape> shapes;
 
-        public CGroup(Graphics g) 
+        public CGroup(Graphics g, string Name) 
         {
             this.g = g;
             shapes = new List<Shape>();
+            this.Name = Name;
+        }
+
+        public override string Who()
+        {
+            return Name;
         }
         public override void Save(StreamWriter stream)
         {
@@ -58,7 +64,11 @@ namespace ООП_4
             }
             return false;
         }
-        public void addShape(Shape shape) { shapes.Add(shape); }
+        public void addShape(Shape shape) 
+        { 
+            shapes.Add(shape);
+
+        }
         override public void move(int x, int y)
         {
             foreach (Shape shape in shapes)

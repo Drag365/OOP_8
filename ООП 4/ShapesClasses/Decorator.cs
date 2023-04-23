@@ -20,6 +20,10 @@ namespace ООП_4.ShapesClasses
 
         }
 
+        public override string Who()
+        {
+            return shape.Who();
+        }
         public override void Save(StreamWriter stream)
         {
             shape.Save(stream);

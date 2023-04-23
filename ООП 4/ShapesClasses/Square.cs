@@ -11,11 +11,12 @@ namespace ООП_4
 {
     public class Square : Shape
     {
-        public Square(Point click, Graphics graphics, char Colored)
+        public Square(Point click, Graphics graphics, char Colored, string Name)
         {
             p = click;
             g = graphics;
             this.Colored = Colored;
+            this.Name = Name;
         }
         public override void Save(StreamWriter stream)
         {

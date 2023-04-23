@@ -52,7 +52,7 @@ namespace ООП_4
             this.BlueOption = new System.Windows.Forms.ToolStripMenuItem();
             this.groupButton = new System.Windows.Forms.ToolStripButton();
             this.unGroupButton = new System.Windows.Forms.ToolStripButton();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.shapeTree = new System.Windows.Forms.TreeView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paintField)).BeginInit();
             this.panel2.SuspendLayout();
@@ -273,20 +273,21 @@ namespace ООП_4
             this.unGroupButton.Text = "toolStripButton4";
             this.unGroupButton.Click += new System.EventHandler(this.unGroupButton_Click);
             // 
-            // treeView1
+            // shapeTree
             // 
-            this.treeView1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.treeView1.Location = new System.Drawing.Point(585, 63);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(203, 322);
-            this.treeView1.TabIndex = 5;
+            this.shapeTree.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.shapeTree.Location = new System.Drawing.Point(585, 63);
+            this.shapeTree.Name = "shapeTree";
+            this.shapeTree.Size = new System.Drawing.Size(203, 322);
+            this.shapeTree.TabIndex = 5;
+            
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.shapeTree);
             this.Controls.Add(this.selectAll);
             this.Controls.Add(this.deleteAll);
             this.Controls.Add(this.CtrlCheck);
@@ -296,6 +297,7 @@ namespace ООП_4
             this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.panel1.ResumeLayout(false);
@@ -332,7 +334,7 @@ namespace ООП_4
         private System.Windows.Forms.ToolStripButton loadButton;
         private System.Windows.Forms.ToolStripButton groupButton;
         private System.Windows.Forms.ToolStripButton unGroupButton;
-        private TreeView treeView1;
+        private TreeView shapeTree;
     }
 }
 
