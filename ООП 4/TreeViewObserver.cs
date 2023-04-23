@@ -24,15 +24,19 @@ namespace ООП_4
             if (obj is Container o)
                 processNode(tn, o.GetShapes());
             _treeView.Nodes.Add(tn);
+            _treeView.ExpandAll();
         }
 
         override public void OnSubjectSelect(CObject obj)
-        {   
-
-            foreach(TreeNode tn in _treeView.Nodes)
+        {
+            int i = 0;
+            foreach(TreeNode tn in _treeView.Nodes[0].Nodes) 
             { 
-                
-                    tn.Checked = true;
+                if (tn.Text == obj.Who())
+                {
+                    _treeView.SelectedNode = _treeView.Nodes[0].Nodes[i];
+                }
+                i++;
             }
         }
 

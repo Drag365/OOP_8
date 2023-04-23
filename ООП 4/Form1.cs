@@ -45,22 +45,25 @@ namespace ООП_4
             container.Draw();
             paintField.Image = map;
             toolStrip1.Refresh();
-            this.shapeTree.ExpandAll();
         }
 
         private void paintField_MouseClick(object sender, MouseEventArgs e)//функция нажатия мышкой для добавления на поле круга или его выделения
         {
-            if (typeOfShape == 0)
+            if (container.CheckPosition(e.Location) == false && ctrlpress == false)
             {
-                container.AddOrSelectShape(Creation.createCCircle(e.Location, Colored));
-            }
-            else if (typeOfShape == 1)
-            {
-                container.AddOrSelectShape(Creation.createSquare(e.Location, Colored));
-            }
-            else if (typeOfShape == 2)
-            {
-                container.AddOrSelectShape(Creation.createTriangle(e.Location, Colored));
+                if (typeOfShape == 0)
+                {
+                    container.Add(Creation.createCCircle(e.Location, Colored));
+
+                }
+                else if (typeOfShape == 1)
+                {
+                    container.Add(Creation.createSquare(e.Location, Colored));
+                }
+                else if (typeOfShape == 2)
+                {
+                    container.Add(Creation.createTriangle(e.Location, Colored));
+                }
             }
             paintField.Invalidate();
         }

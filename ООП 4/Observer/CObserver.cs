@@ -13,8 +13,5 @@ namespace ООП_4.Observer
 
         public abstract void OnSubjectSelect(CObject who);
 
-        public virtual void Dispose()
-        {
-        }
     }
 }

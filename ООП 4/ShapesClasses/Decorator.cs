@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ООП_4.Observer;
 
 namespace ООП_4.ShapesClasses
 {
@@ -93,6 +94,25 @@ namespace ООП_4.ShapesClasses
         override public void changeColor(char Color)
         {
             shape.changeColor(Color);
+        }
+
+        override public void AddObserver(CObserver o)
+        {
+            shape.AddObserver(o);
+        }
+        override public void RemoveObserver(CObserver o)
+        {
+            shape.RemoveObserver(o);
+        }
+
+        override public void NotifyEveryone()
+        {
+            shape.NotifyEveryone();
+        }
+
+        override public void NotifyEveryoneSelect()
+        {
+            shape.NotifyEveryoneSelect();
         }
     }
 }

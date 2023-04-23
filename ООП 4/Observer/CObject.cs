@@ -8,7 +8,7 @@ namespace ООП_4.Observer
 {
     public class CObject
     {
-        private List<CObserver> _observers = new List<CObserver>();
+        public List<CObserver> _observers = new List<CObserver>();
 
         protected string Name;
         virtual public String Who()
@@ -16,16 +16,16 @@ namespace ООП_4.Observer
             return Name;
         }
 
-        public void AddObserver(CObserver o)
+        virtual public void AddObserver(CObserver o)
         {
             _observers.Add(o);
         }
-        public void RemoveObserver(CObserver o)
+        virtual public void RemoveObserver(CObserver o)
         {
             _observers.Remove(o);
         }
 
-        public void NotifyEveryone()
+        virtual public void NotifyEveryone()
         {
             foreach (CObserver o in _observers)
             {
@@ -33,7 +33,7 @@ namespace ООП_4.Observer
             }
         }
 
-        public void NotifyEveryoneSelect()
+        virtual public void NotifyEveryoneSelect()
         {
             foreach (CObserver o in _observers)
             {

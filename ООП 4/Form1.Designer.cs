@@ -31,6 +31,9 @@ namespace ООП_4
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Узел1");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Узел0", new System.Windows.Forms.TreeNode[] {
+            treeNode1});
             this.CtrlCheck = new System.Windows.Forms.CheckBox();
             this.deleteAll = new System.Windows.Forms.Button();
             this.selectAll = new System.Windows.Forms.CheckBox();
@@ -276,11 +279,22 @@ namespace ООП_4
             // shapeTree
             // 
             this.shapeTree.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.shapeTree.FullRowSelect = true;
+            this.shapeTree.HideSelection = false;
             this.shapeTree.Location = new System.Drawing.Point(585, 63);
             this.shapeTree.Name = "shapeTree";
+            treeNode1.Checked = true;
+            treeNode1.Name = "Узел1";
+            treeNode1.Text = "Узел1";
+            treeNode2.BackColor = System.Drawing.Color.White;
+            treeNode2.Checked = true;
+            treeNode2.Name = "Узел0";
+            treeNode2.Text = "Узел0";
+            this.shapeTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode2});
+            this.shapeTree.ShowPlusMinus = false;
             this.shapeTree.Size = new System.Drawing.Size(203, 322);
             this.shapeTree.TabIndex = 5;
-            
             // 
             // Form1
             // 

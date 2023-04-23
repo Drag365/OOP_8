@@ -37,6 +37,10 @@ namespace Laba4OOP.src
             return false;
         }
 
+        virtual public String Who()
+        {
+            return Name;
+        }
         virtual public Graphics getG()
         {
             return g;

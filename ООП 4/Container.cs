@@ -29,23 +29,28 @@ namespace ООП_4
             this.AddObserver(treeViewObserver);
         }
 
-        virtual public void AddOrSelectShape(Shape shape)
+        virtual public bool CheckPosition(Point p)
         {
             if (ctrlPressed == false)
                 unSelectAll();
-            if (isSelect(shape.getPosition())) { return; }
-
-            if (ctrlPressed == false)
-            {
-                shape.AddObserver(treeViewObserver);
-                decorator = new Decorator(shape);
-                shapes.Add(decorator);
-                shape.NotifyEveryoneSelect();
-                shapes.Remove(shape);
-                this.NotifyEveryone();
-                
+            if (isSelect(p)) 
+            { 
+                return true; 
             }
+            return false;
+            
         }
+
+        public void Add(Shape shape)
+        {
+            shape.AddObserver(treeViewObserver);
+            decorator = new Decorator(shape);
+            shapes.Add(decorator);
+            shapes.Remove(shape);
+            this.NotifyEveryone();
+            decorator.NotifyEveryoneSelect();
+        }
+
         override public void Draw()
         {
             foreach (Shape shape in shapes)
@@ -96,9 +101,11 @@ namespace ООП_4
                 }
                 i++;
             }
+            group.AddObserver(treeViewObserver);
             decorator = new Decorator(group);
             shapes.Add(decorator);
             this.NotifyEveryone();
+            decorator.NotifyEveryoneSelect();
         }
 
         public void unCompose()
@@ -152,6 +159,7 @@ namespace ООП_4
                     decorator = new Decorator(shapes[i]);
                     shapes.Add(decorator);
                     shapes.RemoveAt(i);
+                    decorator.NotifyEveryoneSelect();
                     res = true;
                     if (selectMany == false)
                         return res;
@@ -173,6 +181,7 @@ namespace ООП_4
                 }
                 i++;
             }
+            this.NotifyEveryone();
             
         }
         public void delshapes()
@@ -181,13 +190,11 @@ namespace ООП_4
             {
                     shapes.RemoveAt(i);
             }
+            this.NotifyEveryone();
         }
         
 
-        public void Add(Shape shape)
-        {
-                shapes.Add(shape);
-        }
+        
 
         public void Move(int x, int y, int width, int height)
         {

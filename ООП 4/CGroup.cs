@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using ООП_4.Observer;
 using ООП_4.ShapesClasses;
 
 namespace ООП_4
@@ -20,11 +21,6 @@ namespace ООП_4
             this.g = g;
             shapes = new List<Shape>();
             this.Name = Name;
-        }
-
-        public override string Who()
-        {
-            return Name;
         }
         public override void Save(StreamWriter stream)
         {
@@ -59,11 +55,13 @@ namespace ООП_4
             {
                 if (shape.checkPointPosition(point))
                 {
+                    this.NotifyEveryoneSelect();
                     return true;
                 }
             }
             return false;
         }
+
         public void addShape(Shape shape) 
         { 
             shapes.Add(shape);
