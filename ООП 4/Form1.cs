@@ -27,16 +27,23 @@ namespace ООП_4
         char Colored = 'B';
         const string filename = "D:/data.txt";
         Container container;
+        TreeViewObserver observer;
+        int razWidth;
+        int razHeight;
+
 
 
         public Form1()
         {
             InitializeComponent();
-            map = new Bitmap(paintField.Width, paintField.Height);// определяем битмап
-            Creation = new ShapeCreation(Graphics.FromImage(map));// определяем конвеер кругов
-            TreeViewObserver observer = new TreeViewObserver(shapeTree);
+            map = new Bitmap(1920, 1080);// определяем битмап
+            paintField.Image = map;
+            Creation = new ShapeCreation(Graphics.FromImage(paintField.Image));// определяем конвеер кругов
+            observer = new TreeViewObserver(shapeTree);
             container = new Container(observer);
-            
+            razWidth = this.Width - paintField.Width;
+            razHeight = this.Height - paintField.Height;   
+
         }
 
         protected void paintField_Paint(object sender, PaintEventArgs e)// функция отрисовки кругов
@@ -64,8 +71,16 @@ namespace ООП_4
                 {
                     container.Add(Creation.createTriangle(e.Location, Colored));
                 }
+
+                
+            }
+            else if (typeOfShape == 3 && container.countSelected() == 2)
+            {
+                container.AddPointer(Creation.createPointer(e.Location));
             }
             paintField.Invalidate();
+             razWidth = this.Width - paintField.Width;
+            razHeight = this.Height - paintField.Height;
         }
 
 
@@ -74,7 +89,7 @@ namespace ООП_4
             if ((Control.ModifierKeys & Keys.Control) == Keys.Control)// определяем зажатие клавиши контрол
             {
                 ctrlpress = true;
-                container.ctrlPressed = !container.ctrlPressed;
+                container.ctrlChange();
             }
             if (e.KeyCode == Keys.Delete)
             {
@@ -204,6 +219,7 @@ namespace ООП_4
         {
             CShapeArray array = new CShapeArray(Graphics.FromImage(map));
             container.Load(array);
+            container.NotifyEveryone();
         }
 
         private void groupButton_Click(object sender, EventArgs e)
@@ -216,9 +232,39 @@ namespace ООП_4
             container.unCompose();
         }
 
+        
+
+
+        private void shapeTree_MouseDown(object sender, MouseEventArgs e)
+        {
+            //observer.NotifyEveryone();
+        }
+
+        private void shapeTree_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            // observer.NotifyEveryone();
+           
+        }
+
+        private void shapeTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            observer.NotifyEveryone();
+            if (ctrlpress == false)
+                observer.whiteColor();
+            e.Node.BackColor = Color.Gray;
+        }
+
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            
+            panel1.Width = this.Width - razWidth;
+            panel1.Height = this.Height - razHeight;
+            paintField.Width = this.Width - razWidth;
+            paintField.Height = this.Height - razHeight;
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            typeOfShape = 3;
         }
     }
     

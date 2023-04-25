@@ -20,9 +20,9 @@ namespace ООП_4.Observer
         {
             _observers.Add(o);
         }
-        virtual public void RemoveObserver(CObserver o)
+        virtual public void RemoveObserver()
         {
-            _observers.Remove(o);
+            _observers.Clear();
         }
 
         virtual public void NotifyEveryone()
@@ -40,6 +40,15 @@ namespace ООП_4.Observer
                 o.OnSubjectSelect(this);
             }
         }
+
+        virtual public void NotifyEveryoneMove(int x, int y)
+        {
+            foreach (CObserver o in _observers)
+            {
+                o.OnSubjectMove(x, y);
+            }
+        }
+
 
         public virtual void Dispose()
         {

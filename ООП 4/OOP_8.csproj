@@ -54,6 +54,7 @@
     <Compile Include="ShapesClasses\CCircle.cs" />
     <Compile Include="Factory\ShapeCreation.cs" />
     <Compile Include="ShapesClasses\Decorator.cs" />
+    <Compile Include="ShapesClasses\Pointer.cs" />
     <Compile Include="ShapesClasses\Shape.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Form1.cs">
@@ -106,6 +107,7 @@
     <None Include="Properties\Fill.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Properties\Стрелка.png" />
     <Content Include="Properties\Загрузить.png" />
     <Content Include="Properties\Разгруппировать.png" />
     <Content Include="Properties\Сгруппировать.png" />

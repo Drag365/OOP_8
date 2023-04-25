@@ -16,10 +16,12 @@ namespace ООП_4
         private String name2 = "Квадрат ";
         private String name3 = "Треугольник ";
         private String name4 = "Группа ";
+        private String name5 = "Стрелка ";
         private int num1 = 0;
         private int num2 = 0;
         private int num3 = 0;
         private int num4 = 0;
+        private int num5 = 0;
         public ShapeCreation(Graphics graphics)
         {
             g = graphics;
@@ -47,6 +49,12 @@ namespace ООП_4
         {
             num3++;
             return new Triangle(click, g, Colored, name3 + num3.ToString());
+        }
+
+        public Pointer createPointer(Point click)
+        {
+            num5++;
+            return new Pointer(click, g, name5 + num5.ToString());
         }
     }
 }

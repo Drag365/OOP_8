@@ -10,10 +10,11 @@ using ООП_4.ShapesClasses;
 using System.IO;
 using System.Security.Cryptography;
 using ООП_4.Factory;
+using ООП_4.Observer;
 
 namespace ООП_4
 {
-    class Container : Shape
+    public class Container : Shape, CObserver
     {
         const string filename = "D:/data.txt";
         StreamWriter stream = null;
@@ -26,6 +27,7 @@ namespace ООП_4
         {
             shapes = new List<Shape>();
             this.treeViewObserver = treeViewObserver;
+            treeViewObserver.AddObserver(this);
             this.AddObserver(treeViewObserver);
         }
 
@@ -49,6 +51,43 @@ namespace ООП_4
             shapes.Remove(shape);
             this.NotifyEveryone();
             decorator.NotifyEveryoneSelect();
+        }
+
+        public void AddPointer(Shape Pointer)
+        {
+            int s1 = -1;
+            int s2 = -1;
+            int i = 0;
+            foreach (Shape shape in shapes)
+            {
+                if (shape is Decorator && s1 == -1)
+                    s1 = i;
+                else if (shape is Decorator)
+                {
+                    s2 = i;
+                }
+                i++;
+            }
+            if (Pointer is Pointer p)
+            {
+                p.addShapes(shapes[s2], shapes[s1]);
+            }
+            shapes.Add(Pointer);
+            this.NotifyEveryone();
+
+        }
+
+        public int countSelected()
+        {
+            int i = 0;
+            foreach(Shape shape in shapes)
+            {
+                if (shape is Decorator)
+                {
+                    i++;
+                }
+            }
+            return i;
         }
 
         override public void Draw()
@@ -157,9 +196,10 @@ namespace ООП_4
                 if (shapes[i] is Decorator == false && shapes[i].checkPointPosition(point) == true)
                 {
                     decorator = new Decorator(shapes[i]);
-                    shapes.Add(decorator);
-                    shapes.RemoveAt(i);
-                    decorator.NotifyEveryoneSelect();
+                    //shapes.Add(decorator);
+                    shapes.Insert(i ,decorator);
+                    shapes.RemoveAt(i + 1);
+                    this.NotifyEveryone();
                     res = true;
                     if (selectMany == false)
                         return res;
@@ -176,10 +216,16 @@ namespace ООП_4
             {
                 if (shapes[i] is Decorator == true)
                 {
+                    if (shapes[i] is Pointer p)
+                    {
+                        p.Del();
+                    }
                     shapes.RemoveAt(i);
                     continue;
                 }
                 i++;
+
+                
             }
             this.NotifyEveryone();
             
@@ -199,20 +245,21 @@ namespace ООП_4
         public void Move(int x, int y, int width, int height)
         {
 
+            //foreach (Shape shape in shapes)
+            //{
+            //    if (shape is Decorator == true)
+            //    {
+            //        if (shape.canMove(x, y, width, height) == true)
+            //            continue;
+            //        else return;
+            //    }
+            //}
             foreach (Shape shape in shapes)
             {
                 if (shape is Decorator == true)
                 {
                     if (shape.canMove(x, y, width, height) == true)
-                        continue;
-                    else return;
-                }
-            }
-            foreach (Shape shape in shapes)
-            {
-                if (shape is Decorator == true)
-                {
-                    shape.move(x, y);
+                        shape.move(x, y);
                 }
             }
             
@@ -250,6 +297,44 @@ namespace ООП_4
             }
         }
 
-        public List<Shape> GetShapes() { return shapes; }   
+        public List<Shape> GetShapes() { return shapes; }
+
+        public void OnSubjectChanged(CObject who)
+        {
+            string name = treeViewObserver.getNameSelected();
+
+            int i = 0;
+            if (ctrlPressed == false)
+                unSelectAll();
+            for (; i < shapes.Count;)
+            {
+
+                if (shapes[i] is Decorator == false && shapes[i].Who() == name)
+                {
+                    decorator = new Decorator(shapes[i]);
+                    shapes.Add(decorator);
+                    shapes.RemoveAt(i);
+                    break;
+                }
+                i++;
+            }
+        }
+
+        public void ctrlChange()
+        {
+            ctrlPressed = !ctrlPressed;
+            treeViewObserver.ctrlPressed = !ctrlPressed;
+    }
+
+        public void OnSubjectSelect(CObject who)
+        {
+
+        }
+
+        public void OnSubjectMove(int x, int y)
+        {
+        }
+
+
     }
 }

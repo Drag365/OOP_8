@@ -6,18 +6,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ООП_4.Observer;
+using ООП_4.ShapesClasses;
 
 namespace ООП_4
 {
-    public class TreeViewObserver : CObserver
+    public class TreeViewObserver : CObject, CObserver
     {
+        public bool ctrlPressed = false;
         private TreeView _treeView;
         public TreeViewObserver(TreeView treeView) 
         {
             _treeView = treeView;
         }
 
-        override public void OnSubjectChanged(CObject obj)
+        public string getNameSelected()
+        {
+            if (_treeView.SelectedNode == null) return "Null";
+            return _treeView.SelectedNode.Text;
+        }
+        public void pushChange()
+        {
+            NotifyEveryone();
+        }
+        public void OnSubjectChanged(CObject obj)
         {
             _treeView.Nodes.Clear();
             TreeNode tn = new TreeNode("Фигуры");
@@ -27,7 +38,7 @@ namespace ООП_4
             _treeView.ExpandAll();
         }
 
-        override public void OnSubjectSelect(CObject obj)
+        public void OnSubjectSelect(CObject obj)
         {
             int i = 0;
             foreach(TreeNode tn in _treeView.Nodes[0].Nodes) 
@@ -48,6 +59,11 @@ namespace ООП_4
                 // Создаем новый дочерний узел для текущего объекта
                 TreeNode t = new TreeNode(oo.Who());
 
+                if (oo is Decorator) { 
+                    t.BackColor = System.Drawing.Color.Gray;
+                    _treeView.SelectedNode = t;
+                    }
+
                 // Если объект является группой, то рекурсивно обрабатываем его дочерние объекты
                 if (oo is CGroup ooo)
                 {
@@ -58,5 +74,26 @@ namespace ООП_4
                 tn.Nodes.Add(t);
             }
         }
+
+        public void whiteColor()
+        {
+            processNodeColor(_treeView.Nodes[0]);
+        }
+
+        private void processNodeColor(TreeNode tn)
+        {
+            foreach (TreeNode t in tn.Nodes)
+            {
+                if (t.Nodes.Count > 1)
+                    processNodeColor(t);
+                t.BackColor = System.Drawing.Color.White;
+
+            }
+        }
+
+        public void OnSubjectMove(int x, int y)
+        {
+        }
+
     }
 }

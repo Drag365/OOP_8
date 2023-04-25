@@ -7,11 +7,14 @@ using System.Xml.Linq;
 
 namespace ООП_4.Observer
 {
-    public abstract class CObserver
+    public interface CObserver
     {
-        public abstract void OnSubjectChanged(CObject who);
+         void OnSubjectChanged(CObject who);
 
-        public abstract void OnSubjectSelect(CObject who);
+         void OnSubjectSelect(CObject who);
+
+        void OnSubjectMove(int x, int y);
+
 
     }
 }

@@ -100,9 +100,9 @@ namespace ООП_4.ShapesClasses
         {
             shape.AddObserver(o);
         }
-        override public void RemoveObserver(CObserver o)
+        override public void RemoveObserver()
         {
-            shape.RemoveObserver(o);
+            shape.RemoveObserver();
         }
 
         override public void NotifyEveryone()
@@ -113,6 +113,11 @@ namespace ООП_4.ShapesClasses
         override public void NotifyEveryoneSelect()
         {
             shape.NotifyEveryoneSelect();
+        }
+
+        public void OnSubjectMove(int x, int y)
+        {
+            shape.move(x, y);
         }
     }
 }

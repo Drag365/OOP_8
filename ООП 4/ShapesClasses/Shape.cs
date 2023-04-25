@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.IO.Pipes;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -10,7 +11,7 @@ using ООП_4.Observer;
 
 namespace Laba4OOP.src
 {
-    abstract public class Shape : CObject
+    abstract public class Shape : CObject, CObserver
     {
         public Graphics g;
         protected Point p;
@@ -68,6 +69,7 @@ namespace Laba4OOP.src
 
         virtual public void move(int x, int y)
         {
+            NotifyEveryoneMove(x, y);
             p.X += x;
             p.Y += y;
         }
@@ -80,6 +82,21 @@ namespace Laba4OOP.src
         virtual public void changeColor(char Color)
         {
             Colored = Color;
+        }
+
+        public void OnSubjectChanged(CObject who)
+        {
+            return;
+        }
+
+        public void OnSubjectSelect(CObject who)
+        {
+            return;
+        }
+
+        public void OnSubjectMove(int x, int y)
+        {
+            move(x, y);
         }
 
         ~Shape() { }

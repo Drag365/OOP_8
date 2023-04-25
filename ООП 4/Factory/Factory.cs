@@ -19,6 +19,10 @@ namespace ООП_4
     public class CMyShapeFactory : CShapeFactory
     {
         public Graphics g;
+        public int num1 = 0;
+        public int num2 = 0;
+        public int num3 = 0;
+        public int num4 = 0;
         public CMyShapeFactory(Graphics g)
         {
             this.g = g;
@@ -29,16 +33,20 @@ namespace ООП_4
             switch (code)
             {
                 case 'S':
-                    shape = new Square(new Point(0, 0), g, 'B', "Квадрат");
+                    num1++;
+                    shape = new Square(new Point(0, 0), g, 'B', "Квадрат" + num1.ToString());
                     break;
                 case 'C':
-                    shape = new CCIrcle(new Point(0,0), g, 'B', "Круг");
+                    num2++;
+                    shape = new CCIrcle(new Point(0,0), g, 'B', "Круг" + num2.ToString());
                     break;
                 case 'T':
-                    shape = new Triangle(new Point(0, 0), g, 'B', "Треугольник");
+                    num3++;
+                    shape = new Triangle(new Point(0, 0), g, 'B', "Треугольник" + num3.ToString());
                     break;
                 case 'G':
-                    shape = new CGroup(g, "Группа");
+                    num4++;
+                    shape = new CGroup(g, "Группа" + num4.ToString());
                     break;
                 default:
                     break;

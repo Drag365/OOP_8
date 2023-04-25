@@ -38,9 +38,10 @@ namespace ООП_4
             this.deleteAll = new System.Windows.Forms.Button();
             this.selectAll = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.paintField = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.shapeTree = new System.Windows.Forms.TreeView();
+            this.paintField = new System.Windows.Forms.PictureBox();
             this.saveButton = new System.Windows.Forms.ToolStripButton();
             this.loadButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -55,11 +56,11 @@ namespace ООП_4
             this.BlueOption = new System.Windows.Forms.ToolStripMenuItem();
             this.groupButton = new System.Windows.Forms.ToolStripButton();
             this.unGroupButton = new System.Windows.Forms.ToolStripButton();
-            this.shapeTree = new System.Windows.Forms.TreeView();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.paintField)).BeginInit();
             this.panel2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.paintField)).BeginInit();
             this.SuspendLayout();
             // 
             // CtrlCheck
@@ -109,23 +110,12 @@ namespace ООП_4
             this.panel1.Size = new System.Drawing.Size(552, 324);
             this.panel1.TabIndex = 3;
             // 
-            // paintField
-            // 
-            this.paintField.BackColor = System.Drawing.Color.LightGray;
-            this.paintField.Location = new System.Drawing.Point(0, 0);
-            this.paintField.Name = "paintField";
-            this.paintField.Size = new System.Drawing.Size(550, 322);
-            this.paintField.TabIndex = 0;
-            this.paintField.TabStop = false;
-            this.paintField.Paint += new System.Windows.Forms.PaintEventHandler(this.paintField_Paint);
-            this.paintField.MouseClick += new System.Windows.Forms.MouseEventHandler(this.paintField_MouseClick);
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.toolStrip1);
             this.panel2.Location = new System.Drawing.Point(8, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(378, 64);
+            this.panel2.Size = new System.Drawing.Size(421, 64);
             this.panel2.TabIndex = 4;
             // 
             // toolStrip1
@@ -138,13 +128,48 @@ namespace ООП_4
             this.toolStripDropDownButton1,
             this.toolStripDropDownButton2,
             this.groupButton,
-            this.unGroupButton});
+            this.unGroupButton,
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(378, 57);
+            this.toolStrip1.Size = new System.Drawing.Size(421, 57);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // shapeTree
+            // 
+            this.shapeTree.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.shapeTree.FullRowSelect = true;
+            this.shapeTree.HideSelection = false;
+            this.shapeTree.Location = new System.Drawing.Point(585, 63);
+            this.shapeTree.Name = "shapeTree";
+            treeNode1.Checked = true;
+            treeNode1.Name = "Узел1";
+            treeNode1.Text = "Узел1";
+            treeNode2.BackColor = System.Drawing.Color.White;
+            treeNode2.Checked = true;
+            treeNode2.Name = "Узел0";
+            treeNode2.Text = "Узел0";
+            this.shapeTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode2});
+            this.shapeTree.ShowPlusMinus = false;
+            this.shapeTree.Size = new System.Drawing.Size(203, 322);
+            this.shapeTree.TabIndex = 5;
+            this.shapeTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.shapeTree_AfterSelect);
+            this.shapeTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.shapeTree_NodeMouseClick);
+            this.shapeTree.MouseDown += new System.Windows.Forms.MouseEventHandler(this.shapeTree_MouseDown);
+            // 
+            // paintField
+            // 
+            this.paintField.BackColor = System.Drawing.Color.LightGray;
+            this.paintField.Location = new System.Drawing.Point(0, 0);
+            this.paintField.Name = "paintField";
+            this.paintField.Size = new System.Drawing.Size(550, 322);
+            this.paintField.TabIndex = 0;
+            this.paintField.TabStop = false;
+            this.paintField.Paint += new System.Windows.Forms.PaintEventHandler(this.paintField_Paint);
+            this.paintField.MouseClick += new System.Windows.Forms.MouseEventHandler(this.paintField_MouseClick);
             // 
             // saveButton
             // 
@@ -276,25 +301,16 @@ namespace ООП_4
             this.unGroupButton.Text = "toolStripButton4";
             this.unGroupButton.Click += new System.EventHandler(this.unGroupButton_Click);
             // 
-            // shapeTree
+            // toolStripButton1
             // 
-            this.shapeTree.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.shapeTree.FullRowSelect = true;
-            this.shapeTree.HideSelection = false;
-            this.shapeTree.Location = new System.Drawing.Point(585, 63);
-            this.shapeTree.Name = "shapeTree";
-            treeNode1.Checked = true;
-            treeNode1.Name = "Узел1";
-            treeNode1.Text = "Узел1";
-            treeNode2.BackColor = System.Drawing.Color.White;
-            treeNode2.Checked = true;
-            treeNode2.Name = "Узел0";
-            treeNode2.Text = "Узел0";
-            this.shapeTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
-            this.shapeTree.ShowPlusMinus = false;
-            this.shapeTree.Size = new System.Drawing.Size(203, 322);
-            this.shapeTree.TabIndex = 5;
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::ООП_4.Properties.Resources.Стрелка;
+            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(54, 54);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // Form1
             // 
@@ -315,11 +331,11 @@ namespace ООП_4
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.paintField)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.paintField)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -349,6 +365,7 @@ namespace ООП_4
         private System.Windows.Forms.ToolStripButton groupButton;
         private System.Windows.Forms.ToolStripButton unGroupButton;
         private TreeView shapeTree;
+        private ToolStripButton toolStripButton1;
     }
 }
 

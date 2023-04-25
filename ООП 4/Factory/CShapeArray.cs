@@ -63,6 +63,7 @@ namespace ООП_4.Factory
                     stream.Close();
                 }
             }
+
         }
 
         public StreamReader LoadGroup(string filename, StreamReader stream, CMyShapeFactory factory, CGroup group)
